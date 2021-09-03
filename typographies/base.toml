@@ -1,0 +1,31 @@
+name = "Base"
+
+[custom]
+
+[custom.mono]
+font = "Iosevka"
+weight = "Medium"
+bold = "Bold"
+italic = "Oblique"
+bold_italic = "Bold Oblique"
+size = 14
+
+[custom.sans]
+font = "Source Sans Pro"
+weight = "Regular"
+bold = "Bold"
+italic = "Italic"
+bold_italic = "Bold Italic"
+size = 14
+
+[custom.serif]
+font = "Noto Serif"
+weight = "Regular"
+bold = "Bold"
+italic = "Italic"
+bold_italic = "Bold Italic"
+size = 14
+
+[custom.emoji]
+font = "Noto Color Emoji"
+size = 14

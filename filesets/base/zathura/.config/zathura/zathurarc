@@ -1,0 +1,58 @@
+# Zathura configuration file
+# See man `man zathurarc'
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 1
+
+# Stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+
+# Zoom settings
+set zoom-min 10
+set guioptions "s"
+
+# Colors and font
+
+set font "{{typography.mono.font}} {{typography.mono.size}}"
+
+set default-bg                  "{{colors.bg}}"
+set default-fg                  "{{colors.fg}}"
+
+set statusbar-bg                "{{colors.light_bg}}"
+set statusbar-fg                "{{colors.fg}}"
+
+set inputbar-bg                 "{{colors.light_bg}}"
+set inputbar-fg                 "{{colors.fg}}"
+
+set notification-bg             "{{colors.cyan}}"
+set notification-fg             "{{colors.bg}}"
+
+set notification-error-bg       "{{colors.red}}"
+set notification-error-fg       "{{colors.fg}}"
+
+set notification-warning-bg     "{{colors.yellow}}"
+set notification-warning-fg     "{{colors.bg}}"
+
+set highlight-color             "{{colors.yellow}}"
+set highlight-active-color      "{{colors.green}}"
+
+set completion-bg               "{{colors.bg}}"
+set completion-fg               "{{colors.fg}}"
+
+set completion-highlight-bg     "{{colors.yellow}}"
+set completion-highlight-fg     "{{colors.bg}}"
+
+set recolor                     true
+set recolor-keephue             false
+
+set recolor-darkcolor           "{{colors.fg}}"
+set recolor-lightcolor          "{{colors.bg}}"
+
+set render-loading              false
+set scroll-step 50
+
+set selection-clipboard clipboard

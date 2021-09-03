@@ -1,0 +1,352 @@
+###########
+# General #
+###########
+
+# Using Super instead of alt
+set $mod Mod4
+
+# Font
+font pango: {{typography.mono.font}} {{typography.mono.weight}} {{typography.mono.size}}
+
+# Titles
+for_window [class="^.*"] title_format "  %title"
+
+##############
+# Workspaces #
+##############
+
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
+set $ws10 "10"
+
+##########
+# Colors #
+##########
+
+set $background {{colors.bg}}
+set $foreground {{colors.fg}}
+
+set $green {{colors.green}}
+set $red {{colors.red}}
+
+#                         BORDER      BACKGROUND   TEXT        INDICATOR
+client.focused            $green      $green       $background $green
+client.unfocused          $background $background  $foreground $background
+client.focused_inactive   $background $background  $foreground $background
+client.urgent             $red        $red         $foreground $red
+
+################
+# Key Bindings #
+################
+
+# Start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Start dmenu
+# bindsym $mod+d exec dmenu_run
+# bindsym $mod+Shift+d exec "dmenu_run -h 24 -x 12 -y 10 -w 1342 -fn 'Iosevka Nerd Font Mono-11' -nb '$background' -sb '$green' -nf '$foreground' -sf '$background'"
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Toggle Split in vertical/horizontal orientation
+bindsym $mod+v split toggle
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Toggle sticky
+bindsym $mod+o sticky toggle
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+# bindsym $mod+d focus child
+
+# Reload the configuration file
+# bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrde i3)
+bindsym $mod+Shift+r restart
+
+# Lock
+bindsym $mod+shift+x exec betterlockscreen -l dim
+
+# Program shortcuts
+
+# Scrot
+bindsym --release Print exec $HOME/.bin/scrot-screen
+bindsym --release Shift+Print exec $HOME/.bin/maim-area
+bindsym --release $mod+Shift+Print exec $HOME/.bin/slop-ffmpeg-area
+
+# pcmanfm
+# bindsym $mod+p exec --no-startup-id pcmanfm -n
+
+# Chromium
+bindsym $mod+c exec --no-startup-id chromium
+
+# Rofi
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Shift+w exec --no-startup-id rofi -show window
+bindsym $mod+Shift+s exec --no-startup-id rofi -show ssh
+bindsym $mod+Shift+e exec --no-startup-id rofimoji
+bindsym $mod+Shift+p exec --no-startup-id ~/.bin/rofi-passmenu
+bindsym $mod+p exec --no-startup-id ~/.bin/rofi-xrandr
+bindsym $mod+Shift+c exec --no-startup-id ~/.bin/rofi-project
+
+# dunst
+bindsym $mod+Shift+d exec --no-startup-id dunstctl set-paused toggle
+bindsym $mod+Control+grave exec --no-startup-id dunstctl history-pop
+bindsym $mod+grave exec --no-startup-id dunstctl close
+
+##############
+# Workspaces #
+##############
+
+# Allow workspaces back and forth
+workspace_auto_back_and_forth yes
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+Tab workspace back_and_forth
+
+# Move workspace one monitor to the right
+bindsym $mod+Shift+Tab move workspace to output right
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Assign clients to workspaces
+assign [class="^Nautilus$"] → $ws1
+assign [class="^pcmanfm$"] → $ws1
+assign [class="^Pcmanfm$"] → $ws1
+assign [class="^Thunar$"] → $ws1
+
+assign [class="^Firefox$"] → $ws2
+assign [class="^Chromium$" window_role="^browser$"] → $ws2
+for_window [class="^Chromium$" window_role="^pop-up$"] floating enable
+
+assign [class="^atom$"] → $ws3
+assign [class="^Atom$"] → $ws3
+assign [class="^sun-awt-X11-XFramePeer$"] → $ws3
+assign [class="^Processing$"] → $ws3
+for_window [title="^Welcome to Processing"] floating enable
+assign [class="^processing-app-Base$"] → $ws3
+for_window [title="^Java$"] floating enable
+for_window [title="^Java$"] move position center
+
+assign [class="^discord$"] → $ws4
+assign [class="^telegram-desktop$"] → $ws4
+assign [class="^TelegramDesktop$"] → $ws4
+
+assign [class="^cura$"] → $ws6
+assign [class="^inkscape$"] → $ws6
+assign [class="^Inkscape$"] → $ws6
+assign [class="^Darktable$"] → $ws6
+assign [class="^darktable$"] → $ws6
+assign [class="^gimp$"] → $ws6
+assign [class="^Gimp$"] → $ws6
+assign [class="^krita$"] → $ws6
+assign [class="^Blender$"] → $ws6
+assign [title="^LibreOffice$"] → $ws6
+assign [class="^libreoffice$"] → $ws6
+assign [class="^libreoffice-startcenter$"] → $ws6
+assign [class="^libreoffice-writer$"] → $ws6
+
+assign [class="^Steam$"] → $ws9
+assign [title="^Steam$"] → $ws9
+for_window [class="^Unity$"] floating enable
+for_window [title="^Unity - Unity"] floating disable
+for_window [class="^Steam$"] floating enable
+for_window [class="^Steam$" title="^Steam$"] floating disable
+
+for_window [class="^pavucontrol$"] floating enable
+for_window [class="^Pavucontrol$"] floating enable
+for_window [class="^arandr$"] floating enable
+for_window [class="^Arandr$"] floating enable
+
+#############
+# Autostart #
+#############
+
+exec_always $HOME/.bin/bg-feh $HOME/Pictures/wallpapers
+exec_always xmodmap ~/.Xmodmap
+exec_always $HOME/.bin/set-keymap
+exec_always --no-startup-id $HOME/.bin/launch-dunst
+
+#exec_always compton --config $HOME/.config/compton/compton.conf
+#exec_always $HOME/.bin/conky
+
+exec xautolock -time 15 -locker "betterlockscreen -l dim" -corners 0-00
+
+exec pcmanfm -d
+exec discord
+exec telegram-desktop
+exec steam
+exec nm-applet
+exec blueman-applet
+exec pasystray
+exec redshift-gtk
+exec cbatticon BAT0 -l 25 -r 10
+# exec clipit
+
+#########
+# Modes #
+#########
+
+# Resize window (you can also use the mouse for that)
+set $mode_resize resize
+bindsym $mod+r mode "$mode_resize"
+mode "$mode_resize" {
+  bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+
+# same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# System Menu
+set $sysmenu "[p]oweroff  re[b]oot  [h]ibernate  [s]uspend  [l]ogout"
+bindsym $mod+Delete      mode $sysmenu
+
+mode $sysmenu {
+    bindsym r         restart
+    bindsym l         exit
+    bindsym p         exec shutdown -P now
+    bindsym b         exec shutdown -r now
+    bindsym s         exec systemctl suspend
+    bindsym h         exec systemctl hibernate
+    bindsym Return    mode "default"
+    bindsym Escape    mode "default"
+}
+
+
+#######
+# Bar #
+#######
+
+#bar {
+#   status_command $HOME/.bin/launch-polybar
+#
+#}
+
+exec_always --no-startup-id $HOME/.bin/launch-polybar
+
+###################
+# Multimedia Keys #
+###################
+
+# Volume
+
+# PulseAudio
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.bin/manage_volume -i 2 -n
+bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/.bin/manage_volume -d 2 -n
+bindsym XF86AudioMute exec --no-startup-id $HOME/.bin/manage_volume -t -n
+
+# ALSA
+#bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master '2%+'
+#bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master '2%-'
+#bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+
+# MPC
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
+
+# Sreen brightness controls
+#bindsym XF86MonBrightnessUp exec xbacklight +2
+#bindsym XF86MonBrightnessDown exec xbacklight -2
+
+bindsym XF86Display exec arandr
+bindsym XF86TouchpadToggle exec pavucontrol
+
+###########
+# i3-Gaps #
+###########
+
+# Borders
+for_window [class="^.*"] border pixel 3
+for_window [class="^Chromium$" window_role="^browser$"] border pixel 0
+
+# Set inner/outer gaps
+gaps inner 0
+gaps outer 0
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+# smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+smart_borders on

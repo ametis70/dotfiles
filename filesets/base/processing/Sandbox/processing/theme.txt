@@ -1,0 +1,172 @@
+# STATUS
+# Status messages (1 file added to sketch, errors, etc)
+status.notice.fgcolor = {{colors.fg}}
+status.notice.bgcolor = {{colors.bg}}
+status.error.fgcolor = {{colors.fg}}
+status.error.bgcolor = {{colors.red}}
+status.warning.bgcolor = {{colors.yellow}}
+status.warning.fgcolor = {{colors.bg}}
+status.url.fgcolor = {{colors.dark_fg}}
+status.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+# For the clipboard icon, needs to be a little larger on macOS
+status.emoji.font = {{typography.emoji.font}},plain,{{typography.emoji.size}}
+status.emoji.font.macosx = Dialog,plain,22
+
+# HEADER TABS
+# Settings for the tab area at the top.
+header.text.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+header.text.selected.color = {{colors.bg}}
+header.text.unselected.color = {{colors.dark_fg}}
+header.tab.arrow.color = {{colors.fg}}
+header.gradient.top = {{colors.bg}}
+header.gradient.bottom = {{colors.bg}}
+header.tab.selected.color = {{colors.green}}
+header.tab.unselected.color = {{colors.light_bg}}
+header.tab.modified.color = {{colors.yellow}}
+
+# FOOTER TABS
+footer.text.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+footer.text.selected.color = {{colors.fg}}
+footer.text.unselected.color = {{colors.dark_fg}}
+footer.tab.arrow.color = {{colors.fg}}
+footer.gradient.top = {{colors.light_bg}}
+footer.gradient.bottom = {{colors.light_bg}}
+footer.tab.selected.color = {{colors.bg}}
+footer.tab.unselected.color = {{colors.light_bg}}
+# updates orange
+footer.updates.color = {{colors.orange}}
+
+# CONSOLE
+# The font is handled by preferences, so its size/etc are modifiable.
+console.color = {{colors.bg}}
+console.output.color = {{colors.fg}}
+# text color for errors printed in the console
+console.error.color = {{colors.red}}
+
+# TOOLBAR BUTTONS
+buttons.bgcolor = {{colors.bg}}
+
+# for the debug and mode buttons
+#reversed.gradient.top = {{colors.bg}}
+#reversed.gradient.bottom = {{colors.bg}}
+
+## size of divider between editing area and the console
+#divider.size = 0
+## the larger divider on windows is ugly with the little arrows
+## this makes it large enough to see (mouse changes) and use,
+## but keeps it from being annoyingly obtrusive
+#divider.size.windows = 2
+
+divider.height = 0
+divider.color = {{colors.light_bg}}
+divider.dot.diameter = 3
+divider.dot.color = {{colors.dark_fg}}
+
+# TOOLBAR BUTTON TEXT
+toolbar.rollover.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+toolbar.rollover.color = {{colors.fg}}
+toolbar.gradient.top = {{colors.bg}}
+toolbar.gradient.bottom = {{colors.bg}}
+
+# MODE SELECTOR
+mode.title.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+mode.title.color = {{colors.fg}}
+# outline color of the mode button
+mode.button.color = {{colors.fg}}
+#mode.button.gap = 13
+#mode.arrow.width
+mode.bg.color = {{colors.light_bg}}
+# stolen from gradient bottom
+mode.bg.color = {{colors.bg}}
+mode.outline.color = {{colors.light_bg}}
+
+
+# EDITOR - DETAILS
+
+# fg and bg colors
+editor.fgcolor = {{colors.fg}}
+editor.bgcolor = {{colors.bg}}
+
+editor.gradient.top = {{colors.bg}}
+editor.gradient.bottom = {{colors.bg}}
+
+# highlight for the current line
+editor.linehighlight.color={{colors.light_bg}}
+editor.linehighlight=true
+
+editor.caret.color = {{colors.fg}}
+editor.selection.color = {{colors.light_bg}}
+
+# area that's not in use by the text (replaced with tildes)
+editor.invalid.style = {{colors.dark_fg}},plain
+
+# little pooties at the end of lines that show where they finish
+editor.eolmarkers = false
+editor.eolmarkers.color = {{colors.dark_fg}}
+
+# bracket/brace highlighting
+editor.brackethighlight = true
+editor.brackethighlight.color = {{colors.blue}}
+
+editor.gutter.text.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+editor.gutter.text.color = {{colors.fg}}
+
+# marker for breakpointed lines in left hand gutter (2 ascii characters)
+#editor.gutter.breakpoint.marker = <>
+#editor.gutter.breakpoint.marker.color = #4a545e
+
+# marker for the current line in left hand gutter (2 ascii characters)
+#editor.gutter.currentline.marker = ->
+#editor.gutter.currentline.marker.color = #e27500
+
+# bgcolor for the current (highlighted) line
+editor.gutter.linehighlight.color={{colors.light_bg}}
+
+# left- and right-hand gutter color
+editor.gutter.bgcolor = {{colors.bg}}
+
+# color of vertical separation line
+#gutter.linecolor = #e9e9e9
+# space (in px) added to left and right of gutter markers
+editor.gutter.padding = 3
+
+# squiggly line underneath errors in the editor
+editor.error.underline.color = {{colors.red}}
+# squiggly line underneath warnings
+editor.warning.underline.color = {{colors.yellow}}
+# lines next to the scrollbar showing where errors are located
+editor.column.error.color = {{colors.red}}
+editor.column.warning.color = {{colors.yellow}}
+
+# not using these
+# breakpoint.bgcolor = #f0f0f0
+# currentline.bgcolor = #ffff96
+
+errors.header.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+errors.header.bgcolor = {{colors.bg}}
+errors.header.fgcolor = {{colors.fg}}
+errors.row.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+errors.row.fgcolor = {{colors.fg}}
+errors.row.bgcolor = {{colors.bg}}
+errors.selection.fgcolor = {{colors.fg}}
+errors.selection.bgcolor = {{colors.light_bg}}
+errors.selection.error.bgcolor = {{colors.light_bg}}
+errors.selection.warning.bgcolor = {{colors.light_bg}}
+#errors.indicator.size = 3
+errors.indicator.error.color = {{colors.red}}
+errors.indicator.warning.color = {{colors.yellow}}
+
+manager.tab.selected.color = {{colors.fg}}
+manager.tab.unselected.color = {{colors.light_bg}}
+manager.tab.text.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}
+manager.tab.text.selected.color = {{colors.bg}}
+manager.tab.text.unselected.color = {{colors.fg}}
+
+# orange circle for updates
+manager.tab.update.color = {{colors.orange}}
+manager.tab.gradient.top = {{colors.bg}}
+manager.tab.gradient.bottom = {{colors.bg}}
+manager.tab.bg = {{colors.bg}}
+
+# tree for Examples and Sketchbook windows
+tree.font = status.font = {{typography.mono.font}}{{typography.mono.weight}},plain,{{typography.mono.size}}

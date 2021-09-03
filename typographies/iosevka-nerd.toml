@@ -1,0 +1,16 @@
+name = "Iosevka Nerd Font"
+extends = "base"
+
+[custom]
+
+[custom.mono]
+font = "Iosevka Nerd Font"
+weight = "Medium"
+bold = "Bold"
+italic = "Oblique"
+bold_italic = "Bold Oblique"
+size = 14
+
+[custom.kitty]
+font = "Iosevka"
+append = "Nerd Font Complete Monospace"

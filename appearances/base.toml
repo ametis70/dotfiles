@@ -1,0 +1,8 @@
+name = "Base"
+
+[custom]
+gtk_theme = "Materia-dark-compact"
+icon_theme = "Papirus-Dark"
+cursor_theme = "capitaine-cursors"
+terminal_padding = 8
+window_gap = 8

@@ -1,0 +1,156 @@
+#define alpha #00000000
+
+#define base00 {{colors.bg}}
+#define base01 {{colors.light_bg}}
+#define base02 {{colors.selection}}
+#define base03 {{colors.comment}}
+#define base04 {{colors.dark_fg}}
+#define base05 {{colors.fg}}
+#define base06 {{colors.light_fg}}
+#define base07 {{colors.lighter_fg}}
+#define base08 {{colors.red}}
+#define base09 {{colors.orange}}
+#define base0A {{colors.yellow}}
+#define base0B {{colors.green}}
+#define base0C {{colors.blue}}
+#define base0D {{colors.cyan}}
+#define base0E {{colors.magenta}}
+#define base0F {{colors.brown}}
+
+*foreground:   base05
+#ifdef background_opacity
+*background:   [background_opacity]base00
+#else
+*background:   base00
+#endif
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06
+
+! General settings
+URxvt*saveline:         15000
+
+! Disable scrollbar
+URxvt.scrollBar: 0
+
+! Cursor blink
+URxvt.cursorBlink: 1
+
+! Geometry
+URxvt.geometry: 	102x22
+
+! Clipboard
+!URxvt.perl-ext-common: default,clipboard
+!URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+!URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+
+! Font
+URxvt.font           :xft:{{typography.mono.font}}:{{typography.mono.weight}}:size={{typography.mono.size}}
+URxvt.boldFont       :xft:{{typography.mono.font}}:{{typography.mono.bold}}:size={{typography.mono.size}}
+URxvt.italicFont     :xft:{{typography.mono.font}}:{{typography.mono.italic}}:size={{typography.mono.size}}
+URxvt.boldItalicFont :xft:{{typography.mono.font}}:{{typography.mono.bold_italic}}:size={{typography.mono.size}}
+URxvt.letterSpace: 0
+URxvt*lineSpace: 0
+
+! Icon
+URxvt.iconFile: terminal.svg
+
+! Clickable links
+URxvt.url-launcher: /usr/bin/chromium
+
+! Border
+URxvt.internalBorder:  18
+
+! Fade
+URxvt*fading:  30
+
+
+! Transparency
+
+! fake
+!urxvt*transparent: true
+!urxvt*shading: 10
+
+urxvt*depth: 32
+
+! Map CTRL + arrow keys
+URxvt.keysym.Control-Up:   \033[1;5A
+URxvt.keysym.Control-Down:    \033[1;5B
+URxvt.keysym.Control-Left:    \033[1;5D
+URxvt.keysym.Control-Right:    \033[1;5C
+
+! Font rendering
+Xft.autohint: 1
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+
+!!!!!!!!
+! Rofi !
+!!!!!!!!
+
+! Enable the extended coloring options
+rofi.color-enabled: true
+rofi.modi:  run,window,ssh
+rofi.sidebar-mode:  true
+
+!                     bg                     fg                          bg-alt hl-bg                   hl-fg
+rofi.color-window:    {{colors.bg}},         {{colors.bg}},              alpha, alpha,                  alpha
+rofi.color-normal:    alpha,                 {{colors.comment}},         alpha, {{colors.selection}},   {{colors.fg}}
+rofi.color-active:    alpha,                 {{colors.green}},           alpha, {{colors.selection}},   {{colors.green}}
+rofi.color-urgent:    alpha,                 {{colors.red}},             alpha, {{colors.selection}},   {{colors.red}}
+
+rofi.fake-transparency: false
+rofi.hide-scrollbar: true
+rofi.font: {{typography.mono.font}} {{typography.mono.size}}
+rofi.separator-style: none
+rofi.scrollbar-width: 0
+
+rofi.location: 1
+rofi.yoffset: 40
+rofi.xoffset: 24
+rofi.padding: 18
+rofi.lines: 18
+rofi.eh: 1
+rofi.width: 400
+rofi.bw: 0
+
+rofi.terminal:             kitty
+rofi.ssh-client:           ssh
+rofi.ssh-command:          {terminal} -e {ssh-client} {host}
+rofi.run-command:          {cmd}
+rofi.run-shell-command:    {terminal} -e {cmd}
+rofi.disable-history:      false
+rofi.levenshtein-sort:     false
+rofi.case-sensitive:       false
+rofi.auto-select:          false
+rofi.parse-hosts:          false

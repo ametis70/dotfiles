@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Neovim
+command -v vim >/dev/null && alias vi="vi" vim="vim" vimdiff="vimdiff"
+command -v nvim >/dev/null && alias vi="nvim" vim="nvim" vimdiff="nvim -d"
+
+# Verbose
+alias \
+	rm="rm -v" \
+	mkdir="mkdir -pv" \
+	dmesg="dmesg --ctime" \
+  sudo='sudo ' # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
+
+# Color
+alias \
+	grep="grep -i --color=auto" \
+	Grep="grep --color=auto" \
+	diff="diff --color=auto"
+
+# Xorg
+alias startx="startx ~/.xinitrc"
+
+# Improved coreutils
+alias \
+  ls="ls -hN --group-directories-first --color=auto" \
+	ll="ls -lahN --group-directories-first --color=auto" \
+  cat="bat" \
+  top="gotop"\
+  cp="advcp -pi" \
+  mv="advmv -gi"
+
+# ls="ls-icons -hN --group-directories-first --color=auto" \
+# ll="ls-icons -lahN --group-directories-first --color=auto" \
+
+
+# Other software
+alias \
+  nnn='n' \
+  N='sudo -E nnn -daH '
