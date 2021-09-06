@@ -30,16 +30,17 @@ border-top-size = 0
 
 font-0 = {{typography.mono.font}}:style={{typography.mono.weight}}:size={{typography.mono.size}}:{{appearance.polybar.antialias}};{{appearance.polybar.text_offset}}
 font-1 = {{typography.emoji.font}}:size={{typography.emoji.size}}:scale={{appearance.polybar.icon_font_scale}}:{{appearance.polybar.antialias}};{{appearance.polybar.text_offset}}
+font-2 = {{typography.japanese.font}}:size={{typography.japanese.size}}:{{appearance.polybar.antialias}};{{appearance.polybar.text_offset}}
 
 modules-left = {{appearance.polybar.modules_left}}
 modules-center = {{appearance.polybar.modules_center}}
 modules-right = {{appearance.polybar.modules_right}}
-tray-position =
-tray-background = ${colors.background-alt}
-tray-padding = 2
+tray-position = "right"
+tray-background = ${colors.background}
+tray-padding = 0
 tray-maxsize = 18
-tray-detached = true
-tray-offset-x = -4
+tray-detached = false
+tray-offset-x = 0
 
 [module/empty]
 type = custom/script
@@ -94,17 +95,17 @@ label-visible = {{appearance.polybar.i3_label}}
 label-visible-padding= 1
 label-visible-foreground = ${colors.purple}
 
-ws-icon-0 = 1;home
-ws-icon-1 = 2;web
-ws-icon-2 = 3;vim
-ws-icon-3 = 4;chat
-ws-icon-4 = 5;music
-ws-icon-5 = 6;design
-ws-icon-6 = 7;seven
-ws-icon-7 = 8;eight
-ws-icon-8 = 9;games
-ws-icon-9 = 10;random
-ws-icon-default = ?
+ws-icon-0 = 1;{{appearance.polybar.ws0_icon}}
+ws-icon-1 = 2;{{appearance.polybar.ws1_icon}}
+ws-icon-2 = 3;{{appearance.polybar.ws2_icon}}
+ws-icon-3 = 4;{{appearance.polybar.ws3_icon}}
+ws-icon-4 = 5;{{appearance.polybar.ws4_icon}}
+ws-icon-5 = 6;{{appearance.polybar.ws5_icon}}
+ws-icon-6 = 7;{{appearance.polybar.ws6_icon}}
+ws-icon-7 = 8;{{appearance.polybar.ws7_icon}}
+ws-icon-8 = 9;{{appearance.polybar.ws8_icon}}
+ws-icon-9 = 10;{{appearance.polybar.ws9_icon}}
+ws-icon-default = {{appearance.polybar.ws_icon}}
 
 [module/wifi]
 type = internal/network

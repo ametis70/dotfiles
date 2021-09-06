@@ -26,6 +26,10 @@ italic = "Italic"
 bold_italic = "Bold Italic"
 size = 14
 
+[custom.japanese]
+font = "Source Han Sans JP"
+size = 14
+
 [custom.emoji]
 font = "Noto Color Emoji"
 size = 14
