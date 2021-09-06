@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-global
 
 return require('packer').startup(function()
-    use {'wbthomason/packer.nvim', opt = true}
+    use 'wbthomason/packer.nvim'
 
     use {'ibhagwan/fzf-lua',
         requires = {
