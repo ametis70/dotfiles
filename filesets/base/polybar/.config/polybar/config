@@ -1,6 +1,6 @@
 [colors]
 background = {{colors.bg}}
-background-alt = {{colors.comment}}
+background-alt = {{colors.light_bg}}
 foreground = {{colors.fg}}
 red = {{colors.red}}
 green = {{colors.green}}

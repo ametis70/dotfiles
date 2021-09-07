@@ -130,9 +130,11 @@ return require('packer').startup(function()
     }
     use { 'RRethy/nvim-base16' }
     use { 'NTBBloodbath/doom-one.nvim' }
+    use { 'folke/tokyonight.nvim' }
+    use { 'marko-cerovac/material.nvim' }
 
     -- Cursorline
-    use { 'xiyaowong/nvim-cursorword' }
+    -- use { 'xiyaowong/nvim-cursorword' }
     -- use { 'yamatsum/nvim-cursorline' }
 
     use {

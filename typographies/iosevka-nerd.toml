@@ -6,11 +6,11 @@ extends = "base"
 [custom.mono]
 font = "Iosevka Nerd Font"
 weight = "Medium"
-bold = "Bold"
+bold = "Heavy"
 italic = "Oblique"
-bold_italic = "Bold Oblique"
+bold_italic = "Heavy Oblique"
 size = 14
 
 [custom.kitty]
 font = "Iosevka"
-append = "Nerd Font Complete Monospace"
+append = "Nerd Font Complete"
