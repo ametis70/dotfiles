@@ -145,6 +145,10 @@ bindsym $mod+Shift+d exec --no-startup-id dunstctl set-paused toggle
 bindsym $mod+Control+grave exec --no-startup-id dunstctl history-pop
 bindsym $mod+grave exec --no-startup-id dunstctl close
 
+# org-agenda
+bindsym $mod+Shift+o exec --no-startup-id org-agenda
+
+
 ##############
 # Workspaces #
 ##############
