@@ -30,7 +30,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-completions"
 zplug "laurenkt/zsh-vimto"
-zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
+# zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 # zplug "paulmelnikow/zsh-startup-timer"
 # zplug "lib/nvm", from:oh-my-zsh
 
