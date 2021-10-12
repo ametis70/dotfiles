@@ -19,13 +19,13 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "{{typography.mono.font}}" :size {{typography.mono.size}}))
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14))
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme '{{colors.emacs_colorscheme}})
+(setq doom-theme 'doom-one)
 (setq doom-themes-treemacs-theme "doom-colors")
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -83,6 +83,8 @@
                                    (directory-files-recursively
                                     directory org-agenda-file-regexp))
                                  '("~/.org/work/" "~/.org/projects/" "~/.org/learning/" "~/.org/calendars" "~/.org/conferences/"))))
+  (setq org-roam-directory (file-truename "~/.org/roam"))
+  (org-roam-db-autosync-mode)
   )
 
 (use-package! org-fancy-priorities
@@ -98,36 +100,30 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-(use-package! org-ref
-  :after org
-  :config
-  (setq bibtex-completion-pdf-field 'file)
-  (defun my/org-ref-open-pdf-at-point ()
-    "Open the pdf for bibtex key under point if it exists."
-    (interactive)
-    (let* ((results (org-ref-get-bibtex-key-and-file))
-           (key (car results))
-           (pdf-file (car (bibtex-completion-find-pdf key))))
-      (if (file-exists-p pdf-file)
-          (find-file pdf-file) ; original in org-ref-help,
-                                        ; opens external viewer (org-open-file pdf-file)
-        (message "No PDF found for %s" key))))
-  (setq org-ref-open-pdf-function 'find-file)
-
-  (setq bibtex-file "~/.org/biblio.bib"
-        bibtex-completion-bibliography bibtex-file
-        reftex-default-bibliography bibtex-file
-        org-ref-default-bibliography (list bibtex-file)
-        org-ref-completion-library 'org-ref-ivy-cite
-        org-ref-bibliography-notes "~/.org/biblio-notes.org"
-        org-ref-pdf-directory "~/.org/biblio-pdfs/")
-  )
-
-(use-package! org-roam
-  :after org
-  :config
-  (setq org-roam-db-location "/home/ianmethyst/.local/share/emacs/org-roam.db"))
-
+; (use-package! org-ref
+;   :after org
+;   :config
+;   (setq bibtex-completion-pdf-field 'file)
+;   (defun my/org-ref-open-pdf-at-point ()
+;     "Open the pdf for bibtex key under point if it exists."
+;     (interactive)
+;     (let* ((results (org-ref-get-bibtex-key-and-file))
+;            (key (car results))
+;            (pdf-file (car (bibtex-completion-find-pdf key))))
+;       (if (file-exists-p pdf-file)
+;           (find-file pdf-file) ; original in org-ref-help,
+;                                         ; opens external viewer (org-open-file pdf-file)
+;         (message "No PDF found for %s" key))))
+;   (setq org-ref-open-pdf-function 'find-file)
+;
+;   (setq bibtex-file "~/.org/biblio.bib"
+;         bibtex-completion-bibliography bibtex-file
+;         reftex-default-bibliography bibtex-file
+;         org-ref-default-bibliography (list bibtex-file)
+;         org-ref-completion-library 'org-ref-ivy-cite
+;         org-ref-bibliography-notes "~/.org/biblio-notes.org"
+;         org-ref-pdf-directory "~/.org/biblio-pdfs/")
+;   )
 
 (setq deft-directory "~/.org"
       deft-recursive t)
@@ -138,7 +134,7 @@
 (setq-default delete-by-moving-to-trash t)                ; Delete files to trash
 
 (defvar holiday-custom-holidays nil
-  "Custom holidays")
+  "Custom holidays.")
 
 (setq holiday-custom-holidays
       '((holiday-fixed 1 1 "Año nuevo")
@@ -192,3 +188,5 @@
    'org-caldav-sync
    :after
    #'fix-birthdays-timestamps))
+
+(setq +format-with-lsp nil)

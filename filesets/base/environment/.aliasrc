@@ -5,7 +5,7 @@ command -v vim >/dev/null && alias vi="vi" vim="vim" vimdiff="vimdiff"
 command -v nvim >/dev/null && alias vi="nvim" vim="nvim" vimdiff="nvim -d"
 
 # neovim-remote
-nvr_command="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+nvr_command="nvr --remote-wait +'set bufhidden=wipe'"
 command -v nvr >/dev/null && alias vi="$nvr_command" vim="$nvr_command"
 
 # Verbose

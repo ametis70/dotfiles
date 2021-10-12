@@ -22,7 +22,7 @@ done
 if [ -d "$HOME/.dotfiles" ]; then
   cd "$HOME/.dotfiles"
   for dir in $(find . -maxdepth 1 -type d -printf "%f\n" | grep -v '\.'); do
-    stow -D -d "$HOME/.dotfiles" -t "$HOME" "$dir" &> /dev/null
+    stow -D -d "$HOME/.dotfiles" -t "$HOME" "$dir" &> /dev/null || true
   done
 
   cd $OLDIR

@@ -56,7 +56,6 @@
 (package! org-fancy-priorities)
 (package! org-ref)
 (package! org-caldav)
-(package! org-roam-server)
 
 (package! nyan-mode)
 

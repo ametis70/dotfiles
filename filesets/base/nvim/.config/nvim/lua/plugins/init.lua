@@ -1,22 +1,22 @@
 ---@diagnostic disable: undefined-global
-
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
-    use {'ibhagwan/fzf-lua',
+    -- Fuzzy finder
+    use {
+        'ibhagwan/fzf-lua',
         requires = {
-            'vijaymarupudi/nvim-fzf',
-            'kyazdani42/nvim-web-devicons' -- optional for icons
+            'vijaymarupudi/nvim-fzf', 'kyazdani42/nvim-web-devicons' -- optional for icons
         },
         config = [[require('plugins.fzf-lua')]]
     }
 
+    -- File explorer
     use {
         'kevinhwang91/rnvimr',
         config = [[require('plugins.rnvimr')]]
     }
 
-    -- File explorer
     use {
         'kyazdani42/nvim-tree.lua',
         config = [[require('plugins.nvim-tree')]]
@@ -29,19 +29,21 @@ return require('packer').startup(function()
     }
 
     -- Langugage specific LSP plugins
-    use { 'tjdevries/nlua.nvim' }
+    use {'tjdevries/nlua.nvim'}
+    use {'jose-elias-alvarez/nvim-lsp-ts-utils'}
 
     -- Additional LSP plugins
     use {
-        'glepnir/lspsaga.nvim',
+        'tami5/lspsaga.nvim',
+        commit = '373bc031b39730cbfe492533c3acfac36007899a',
         config = [[require('plugins.lspsaga-nvim')]]
     }
 
-    use { 'folke/lsp-colors.nvim' }
+    use {'folke/lsp-colors.nvim'}
 
     -- Outline (LSP)
     -- use { 'simrat39/symbols-outline.nvim' }
-    use { 'stevearc/aerial.nvim' }
+    use {'stevearc/aerial.nvim'}
 
     -- Diagnostics
     use {
@@ -73,8 +75,8 @@ return require('packer').startup(function()
     }
 
     -- Snippets
-    use { 'hrsh7th/vim-vsnip' }
-    use { 'hrsh7th/vim-vsnip-integ' }
+    use {'hrsh7th/vim-vsnip'}
+    use {'hrsh7th/vim-vsnip-integ'}
 
     -- Terminal
     use {
@@ -85,14 +87,14 @@ return require('packer').startup(function()
     -- Git
     use {
         'lewis6991/gitsigns.nvim',
-        requires = { 'nvim-lua/plenary.nvim' },
+        requires = {'nvim-lua/plenary.nvim'},
         config = [[require('plugins.gitsigns-nvim')]]
     }
-    use { 'tpope/vim-fugitive' }
+    use {'tpope/vim-fugitive'}
     use {
         'kdheepak/lazygit.nvim',
         config = [[require('plugins.lazygit-nvim')]]
-        }
+    }
 
     -- Indent lines
     use {
@@ -101,9 +103,12 @@ return require('packer').startup(function()
     }
 
     -- Handy stuff
-    use { 'ygm2/rooter.nvim' }
-    use { 'dhruvasagar/vim-table-mode' }
-    use { 'tpope/vim-eunuch' }
+    use {
+        'ygm2/rooter.nvim',
+        config = function() vim.g.outermost_root = false end
+    }
+    use {'dhruvasagar/vim-table-mode'}
+    use {'tpope/vim-eunuch'}
 
     -- Statusline
     -- use {
@@ -112,26 +117,29 @@ return require('packer').startup(function()
     -- }
 
     use {
-      'hoob3rt/lualine.nvim',
-      requires = {'kyazdani42/nvim-web-devicons', opt = true},
-      config = [[require('plugins.lualine')]]
+        'hoob3rt/lualine.nvim',
+        requires = {
+            'kyazdani42/nvim-web-devicons',
+            opt = true
+        },
+        config = [[require('plugins.lualine')]]
     }
 
     -- Syntax plugins
-    use { 'euclidianAce/BetterLua.vim' }
+    use {'euclidianAce/BetterLua.vim'}
 
     -- Color highlighting
-    use { 'norcalli/nvim-colorizer.lua' }
+    use {'norcalli/nvim-colorizer.lua'}
 
     -- Colorschemes
     use {
         'Th3Whit3Wolf/onebuddy',
-        requires = { {'tjdevries/colorbuddy.vim'} }
+        requires = {'tjdevries/colorbuddy.vim'}
     }
-    use { 'RRethy/nvim-base16' }
-    use { 'NTBBloodbath/doom-one.nvim' }
-    use { 'folke/tokyonight.nvim' }
-    use { 'marko-cerovac/material.nvim' }
+    use {'RRethy/nvim-base16'}
+    use {'NTBBloodbath/doom-one.nvim'}
+    use {'folke/tokyonight.nvim'}
+    use {'marko-cerovac/material.nvim'}
 
     -- Cursorline
     -- use { 'xiyaowong/nvim-cursorword' }
@@ -147,5 +155,7 @@ return require('packer').startup(function()
         'petobens/poet-v',
         config = [[require('plugins.poet-v')]]
     }
-end)
 
+    -- Blade
+    use {'Eduruiz/vim-blade'}
+end)
