@@ -2,18 +2,12 @@ local lsp = require("lspconfig")
 local aerial = require("aerial")
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        signs = true,
-        virtual_text = true,
-        underline = true
-    })
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
+                 {signs = true, virtual_text = true, underline = true})
 
 local noremap = function(lhs, rhs, mode)
     mode = mode or 'n'
-    local opts = {
-        noremap = true,
-        silent = true
-    }
+    local opts = {noremap = true, silent = true}
     vim.api.nvim_buf_set_keymap(0, mode, lhs, rhs, opts)
 end
 
@@ -23,9 +17,7 @@ local set_lsp_config = function(client, bufnr)
     aerial.on_attach(client)
 
     local mappings = {
-        v = {
-            ['<leader>ca'] = '<cmd><C-U>Lspsaga range_code_action<CR'
-        },
+        v = {['<leader>ca'] = '<cmd><C-U>Lspsaga range_code_action<CR'},
         n = {
             ['gD'] = '<cmd>lua vim.lsp.buf.declaration()<CR>',
             ['gd'] = '<cmd>lua vim.lsp.buf.definition()<CR>',
@@ -53,25 +45,37 @@ local set_lsp_config = function(client, bufnr)
     end
 end
 
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+
+    if server.name == "tailwindcss" then
+        opts.handlers = {
+            ["tailwindcss/getConfiguration"] = function(_, _, params, _, bufnr,
+                                                        _)
+                vim.lsp.buf_notify(bufnr,
+                                   "tailwindcss/getConfigurationResponse",
+                                   {_id = params._id})
+            end
+        }
+    end
+
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
+
 -- Lua
-require('nlua.lsp.nvim').setup(lsp, {
-    on_attach = set_lsp_config
-})
+require('nlua.lsp.nvim').setup(lsp, {on_attach = set_lsp_config})
 
 -- C/C++
-lsp.clangd.setup {
-    on_attach = set_lsp_config
-}
+lsp.clangd.setup {on_attach = set_lsp_config}
 
 -- Golang
-lsp.gopls.setup {
-    on_attach = set_lsp_config
-}
+lsp.gopls.setup {on_attach = set_lsp_config}
 
 -- PHP
-lsp.phpactor.setup {
-    on_attach = set_lsp_config
-}
+lsp.phpactor.setup {on_attach = set_lsp_config}
 
 -- Typescript
 lsp.tsserver.setup {
@@ -82,9 +86,7 @@ lsp.tsserver.setup {
 }
 
 -- Python
-lsp.pyright.setup {
-    on_attach = set_lsp_config
-}
+lsp.pyright.setup {on_attach = set_lsp_config}
 
 local eslint = {
     lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
@@ -101,10 +103,7 @@ local flake8 = {
     lintFormats = {"%f:%l:%c: %m"}
 }
 
-local isort = {
-    formatCommand = "isort --profile black -",
-    formatStdin = true
-}
+local isort = {formatCommand = "isort --profile black -", formatStdin = true}
 
 local phpstan = {
     lintCommand = "./vendor/bin/phpstan analyze --error-format raw --no-progress"

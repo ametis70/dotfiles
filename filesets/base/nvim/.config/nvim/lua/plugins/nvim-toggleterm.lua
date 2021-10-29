@@ -6,17 +6,12 @@ require("toggleterm").setup {
     start_in_insert = true,
     direction = 'float',
     close_on_exit = false,
-    float_opts = {
-        winblend = 0,
-        border = 'single'
-    }
+    float_opts = {winblend = 0, border = 'single'}
 }
 
 function _G.set_terminal_keymaps()
-    local opts = {
-        noremap = true
-    }
+    local opts = {noremap = true}
     vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
 end
 
-vim.cmd('autocmd! TermOpen term://(*toggleterm#* lua set_terminal_keymaps()')
+vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')

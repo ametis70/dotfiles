@@ -1,9 +1,14 @@
+local get_buffer_name = function()
+    -- Prevent glob expansion on weird filenames
+    return "'" .. vim.api.nvim_buf_get_name(0) .. "'"
+end
+
 local prettier = function()
     return {
         exe = "prettier",
         args = {
-            "--stdin-filepath", vim.api.nvim_buf_get_name(0), '--single-quote',
-            '--no-semi'
+            "--stdin-filepath", get_buffer_name(), '--single-quote',
+            '--no-semi', '--prose-wrap', 'always'
         },
         stdin = true
     }
@@ -12,7 +17,7 @@ end
 local black = function()
     return {
         exe = "black",
-        args = {"-q", "--stdin-filename", vim.api.nvim_buf_get_name(0), "-"},
+        args = {"-q", "--stdin-filename", get_buffer_name(), "-"},
         stdin = true
     }
 end
@@ -20,33 +25,19 @@ end
 local clang_format = function()
     return {
         exe = "clang-format",
-        args = {"--assume-filename", vim.api.nvim_buf_get_name(0)},
+        args = {"--assume-filename", get_buffer_name()},
         stdin = true,
         cwd = vim.fn.expand('%:p:h')
     }
 end
 
-local gofmt = function()
-    return {
-        exe = "gofmt",
-        stdin = true
-    }
-end
+local gofmt = function() return {exe = "gofmt", stdin = true} end
 
 local blade_formatter = function()
-    return {
-        exe = "blade-formatter",
-        args = {"--stdin"},
-        stdin = true
-    }
+    return {exe = "blade-formatter", args = {"--stdin"}, stdin = true}
 end
 
-local lua_formatter = function()
-    return {
-        exe = "lua-format",
-        stdin = true
-    }
-end
+local lua_formatter = function() return {exe = "lua-format", stdin = true} end
 
 require('formatter').setup({
     logging = false,
@@ -62,6 +53,7 @@ require('formatter').setup({
         php = {prettier},
         css = {prettier},
         html = {prettier},
+        yaml = {prettier},
         python = {black},
         lua = {lua_formatter}
     }
@@ -70,6 +62,6 @@ require('formatter').setup({
 vim.api.nvim_exec([[
 augroup FormatAutogroup
 autocmd!
-autocmd BufWritePost *.c,*.h,*.cpp,*.go,*.html,*.css,*.js,*.ts,*.jsx,*.tsx,*.py,*.blade.php,*.php,*.lua FormatWrite
+autocmd BufWritePost *.c,*.h,*.cpp,*.go,*.html,*.css,*.js,*.ts,*.jsx,*.tsx,*.py,*.blade.php,*.php,*.lua,*.yaml,*.yml FormatWrite
 augroup END
 ]], true)

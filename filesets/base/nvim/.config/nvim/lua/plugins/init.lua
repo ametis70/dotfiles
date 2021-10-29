@@ -12,21 +12,13 @@ return require('packer').startup(function()
     }
 
     -- File explorer
-    use {
-        'kevinhwang91/rnvimr',
-        config = [[require('plugins.rnvimr')]]
-    }
+    use {'kevinhwang91/rnvimr', config = [[require('plugins.rnvimr')]]}
 
-    use {
-        'kyazdani42/nvim-tree.lua',
-        config = [[require('plugins.nvim-tree')]]
-    }
+    use {'kyazdani42/nvim-tree.lua', config = [[require('plugins.nvim-tree')]]}
 
     -- LSP config
-    use {
-        'neovim/nvim-lspconfig',
-        config = [[require('plugins.lsp')]]
-    }
+    use {'neovim/nvim-lspconfig', config = [[require('plugins.lsp')]]}
+    use {'williamboman/nvim-lsp-installer'}
 
     -- Langugage specific LSP plugins
     use {'tjdevries/nlua.nvim'}
@@ -46,10 +38,7 @@ return require('packer').startup(function()
     use {'stevearc/aerial.nvim'}
 
     -- Diagnostics
-    use {
-        'folke/trouble.nvim',
-        config = [[require('plugins.trouble-nvim')]]
-    }
+    use {'folke/trouble.nvim', config = [[require('plugins.trouble-nvim')]]}
 
     -- Tree-sitter
     use {
@@ -69,10 +58,7 @@ return require('packer').startup(function()
     }
 
     -- Completion
-    use {
-        'hrsh7th/nvim-compe',
-        config = [[require('plugins.nvim-compe')]]
-    }
+    use {'hrsh7th/nvim-compe', config = [[require('plugins.nvim-compe')]]}
 
     -- Snippets
     use {'hrsh7th/vim-vsnip'}
@@ -91,10 +77,7 @@ return require('packer').startup(function()
         config = [[require('plugins.gitsigns-nvim')]]
     }
     use {'tpope/vim-fugitive'}
-    use {
-        'kdheepak/lazygit.nvim',
-        config = [[require('plugins.lazygit-nvim')]]
-    }
+    use {'kdheepak/lazygit.nvim', config = [[require('plugins.lazygit-nvim')]]}
 
     -- Indent lines
     use {
@@ -118,10 +101,7 @@ return require('packer').startup(function()
 
     use {
         'hoob3rt/lualine.nvim',
-        requires = {
-            'kyazdani42/nvim-web-devicons',
-            opt = true
-        },
+        requires = {'kyazdani42/nvim-web-devicons', opt = true},
         config = [[require('plugins.lualine')]]
     }
 
@@ -132,10 +112,7 @@ return require('packer').startup(function()
     use {'norcalli/nvim-colorizer.lua'}
 
     -- Colorschemes
-    use {
-        'Th3Whit3Wolf/onebuddy',
-        requires = {'tjdevries/colorbuddy.vim'}
-    }
+    use {'Th3Whit3Wolf/onebuddy', requires = {'tjdevries/colorbuddy.vim'}}
     use {'RRethy/nvim-base16'}
     use {'NTBBloodbath/doom-one.nvim'}
     use {'folke/tokyonight.nvim'}
@@ -151,10 +128,7 @@ return require('packer').startup(function()
     }
 
     -- Python
-    use {
-        'petobens/poet-v',
-        config = [[require('plugins.poet-v')]]
-    }
+    use {'petobens/poet-v', config = [[require('plugins.poet-v')]]}
 
     -- Blade
     use {'Eduruiz/vim-blade'}
