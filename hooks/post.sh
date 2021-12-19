@@ -6,7 +6,7 @@ ln -s "$DTTR_OUT" "$HOME/.dotfiles"
 echo "Linking individual dotfiles"
 cd "$HOME/.dotfiles"
 for dir in $(find . -maxdepth 1 -type d -printf "%f\n" | grep -v '\.'); do
-  stow -d "$HOME/.dotfiles" -t "$HOME" "$dir"
+  stow -d "$HOME/.dotfiles" -t "$HOME" -S "$dir"
 done
 
 ln -s "$HOME/.Xdefaults" "$HOME/.Xresources"
