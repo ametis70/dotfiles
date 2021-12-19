@@ -1,0 +1,22 @@
+IMAPAccount ianmancini
+Host c2100944.ferozo.com
+User contacto@ianmancini.com.ar
+PassCmd "pass mail/contacto@ianmancini.com.ar"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore ianmancini-remote
+Account ianmancini
+
+MaildirStore ianmancini-local
+SubFolders Verbatim
+Path ~/.mail/ianmancini/
+Inbox ~/.mail/ianmancini/Inbox
+
+Channel ianmancini
+Far :ianmancini-remote:
+Near :ianmancini-local:
+Patterns * !ianmancini/* !Promociones !spam
+Create Both
+Expunge Both
+SyncState *
