@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Ian Mancini"
-      user-mail-address "ianmethyst@gmail.com")
+      user-mail-address "contacto@ianmancini.com.ar")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -205,3 +205,13 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
+
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+(set-email-account! "ianmancini"
+  '((mu4e-sent-folder       . "/Sent Items")
+    (mu4e-drafts-folder     . "/Drafts")
+    (mu4e-trash-folder      . "/Trash")
+    (mu4e-refile-folder     . "/All Mail")
+    (smtpmail-smtp-user     . "contacto@ianmancini.com.ar")
+    (mu4e-compose-signature . "\nIan Mancini"))
+  t)
