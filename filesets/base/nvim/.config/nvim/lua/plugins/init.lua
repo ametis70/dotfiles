@@ -151,12 +151,6 @@ return require('packer').startup(function()
         config = [[require('plugins.nvim-web-devicons')]]
     }
 
-    -- Python
-    use {
-        'petobens/poet-v',
-        config = [[require('plugins.poet-v')]]
-    }
-
     -- Blade
     use {'Eduruiz/vim-blade'}
 
