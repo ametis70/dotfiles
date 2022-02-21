@@ -3,7 +3,7 @@
 set -euo pipefail
 
 OLDIR="$PWD"
-cd "$DTTR_OUT"
+cd "$DOTMIX_OUT"
 
 if [ -L "$HOME/.Xresources" ]; then
   unlink "$HOME/.Xresources"
@@ -15,6 +15,7 @@ for dir in $(find . -type d); do
     c=$(echo "$_path" | wc -m)
     if [ $c -gt 1 ]; then
         abspath="$HOME/$_path"
+	echo "$abspath"
         [ ! -d "$abspath" ] && mkdir -p "$abspath"
     fi
 done

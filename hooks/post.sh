@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Linking dotfiles dir"
-ln -s "$DTTR_OUT" "$HOME/.dotfiles"
+ln -s "$DOTMIX_OUT" "$HOME/.dotfiles"
 
 echo "Linking individual dotfiles"
 cd "$HOME/.dotfiles"
