@@ -31,13 +31,27 @@ local clang_format = function()
     }
 end
 
-local gofmt = function() return {exe = "gofmt", stdin = true} end
-
-local blade_formatter = function()
-    return {exe = "blade-formatter", args = {"--stdin"}, stdin = true}
+local gofmt = function()
+    return {
+        exe = "gofmt",
+        stdin = true
+    }
 end
 
-local lua_formatter = function() return {exe = "lua-format", stdin = true} end
+local blade_formatter = function()
+    return {
+        exe = "blade-formatter",
+        args = {"--stdin"},
+        stdin = true
+    }
+end
+
+local lua_formatter = function()
+    return {
+        exe = "lua-format",
+        stdin = true
+    }
+end
 
 require('formatter').setup({
     logging = false,
@@ -59,9 +73,34 @@ require('formatter').setup({
     }
 })
 
+vim.g.format_on_save = 1
+
+function _G.toggle_format_on_save_global()
+    if (vim.g.format_on_save == 1) then
+        vim.g.format_on_save = 0
+    else
+        vim.g.format_on_save = 1
+    end
+
+    print(vim.g.format_on_save)
+end
+
+function _G.toggle_format_on_save_buffer()
+    if (vim.b.format_on_save == 1) then
+        vim.b.format_on_save = 0
+    else
+        vim.b.format_on_save = 1
+    end
+
+    print(vim.g.format_on_save)
+
+end
+
 vim.api.nvim_exec([[
 augroup FormatAutogroup
 autocmd!
-autocmd BufWritePost *.c,*.h,*.cpp,*.go,*.html,*.css,*.js,*.ts,*.jsx,*.tsx,*.py,*.blade.php,*.php,*.lua,*.yaml,*.yml FormatWrite
+autocmd BufEnter * let b:format_on_save = 1
+autocmd BufWritePost *.c,*.h,*.cpp,*.go,*.html,*.css,*.js,*.ts,*.jsx,*.tsx,*.py,*.blade.php,*.php,*.lua,*.yaml,*.yml
+  \ if (get(b:, 'format_on_save') != 0 && get(g:, 'format_on_save') == 1) | execute 'FormatWrite' | endif
 augroup END
 ]], true)
