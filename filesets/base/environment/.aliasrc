@@ -8,36 +8,37 @@ command -v nvim >/dev/null && alias vi="nvim" vim="nvim" vimdiff="nvim -d"
 nvr_command="nvr --remote-wait +'set bufhidden=wipe'"
 command -v nvr >/dev/null && alias vi="$nvr_command" vim="$nvr_command"
 
-# Verbose
-alias \
-	rm="rm -v" \
-	mkdir="mkdir -pv" \
-	dmesg="dmesg --ctime" \
-  sudo='sudo ' # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
-
-# Color
-alias \
-	grep="grep -i --color=auto" \
-	Grep="grep --color=auto" \
-	diff="diff --color=auto"
-
-# Xorg
-alias startx="startx ~/.xinitrc"
-
-# Improved coreutils
-alias \
-  ls="ls -hN --group-directories-first --color=auto" \
-	ll="ls -lahN --group-directories-first --color=auto" \
-  cat="bat" \
-  top="gotop"\
-  cp="advcp -pi" \
-  mv="advmv -gi"
-
-# ls="ls-icons -hN --group-directories-first --color=auto" \
-# ll="ls-icons -lahN --group-directories-first --color=auto" \
-
-
-# Other software
-alias \
-  nnn='n' \
-  N='sudo -E nnn -daH '
+if [ `uname -s` = 'Linux' ]; then
+  # Verbose
+  alias \
+  	rm="rm -v" \
+  	mkdir="mkdir -pv" \
+  	dmesg="dmesg --ctime" \
+    sudo='sudo ' # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
+  
+  # Color
+  alias \
+  	grep="grep -i --color=auto" \
+  	Grep="grep --color=auto" \
+  	diff="diff --color=auto"
+  
+  # Xorg
+  alias startx="startx ~/.xinitrc"
+  
+  # Improved coreutils
+  alias \
+    ls="ls -hN --group-directories-first --color=auto" \
+  	ll="ls -lahN --group-directories-first --color=auto" \
+    cat="bat" \
+    top="gotop"\
+    cp="advcp -pi" \
+    mv="advmv -gi"
+  
+  # ls="ls-icons -hN --group-directories-first --color=auto" \
+  # ll="ls-icons -lahN --group-directories-first --color=auto" \
+  
+  # Other software
+  alias \
+    nnn='n' \
+    N='sudo -E nnn -daH '
+fi
