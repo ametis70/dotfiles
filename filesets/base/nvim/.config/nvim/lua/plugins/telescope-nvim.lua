@@ -1,5 +1,19 @@
-local utils = require("utils")
+local wk = require("which-key")
 local actions = require("telescope.actions")
+
+local M = {}
+
+M.project_files = function()
+    local opts = {}
+    local ok = pcall(require"telescope.builtin".git_files, opts)
+    if not ok then require"telescope.builtin".find_files(opts) end
+end
+
+M.file_browser = function()
+    require('telescope').extensions.file_browser.file_browser {
+        cwd = vim.fn.expand('%:p:h')
+    }
+end
 
 require("telescope").setup {
     defaults = {
@@ -9,22 +23,67 @@ require("telescope").setup {
             }
         }
     },
-  pickers = {
-    file_browser = {
-      hidden = true
+    pickers = {
+        find_files = {
+            hidden = true,
+            follow = true
+        },
+        live_grep = {
+            hidden = true,
+            follow = true
+        }
     },
-    find_files = {
-        find_command={'rg','--ignore','--hidden','--files'}
-    },
-  }
+    extensions = {
+        file_browser = {
+            hidden = true,
+            follow = true
+        },
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case"
+        }
+    }
 }
 
-local opts = { noremap = true, silent = true }
-utils.map('n', '<leader><space>', '<cmd>Telescope find_files<CR>', opts)
-utils.map('n', '<leader>.', '<cmd>Telescope file_browser<CR>', opts)
-utils.map('n', '<leader>/', '<cmd>Telescope live_grep<CR>', opts)
-utils.map('n', '<leader>,', '<cmd>Telescope buffers<CR>', opts)
-utils.map('n', '<leader>bb', '<cmd>Telescope buffers<CR>', opts)
-utils.map('n', '<leader>hh', '<cmd>Telescope help_tags<CR>', opts)
-utils.map('n', '<leader>hm', '<cmd>Telescope man_pages<CR>', opts)
-utils.map('n', '<leader>fp', [[<cmd>lua require('telescope.builtin').find_files{ cwd = '~/.config/nvim/' }<CR>]], opts)
+require("telescope").load_extension "file_browser"
+require("telescope").load_extension "ui-select"
+require("telescope").load_extension "fzf"
+require('telescope').load_extension "projects"
+
+local browse_files = {function() M.file_browser() end, "Browse files"}
+local find_file_in_project = {
+    function() M.project_files() end, "Find file in project"
+}
+
+wk.register({
+    f = {
+        f = {"<cmd>Telescope find_files<cr>", "Find file"},
+        p = {
+            [[<cmd>lua require('telescope.builtin').find_files{ cwd = '~/.config/nvim/' }<CR>]],
+            "Find config file"
+        },
+        o = {"<cmd>Telescope oldfiles<cr>", "Open recent file"},
+        b = browse_files
+    },
+    b = {
+        b = {"<cmd>Telescope buffers<CR>", "Switch buffer"}
+    },
+    h = {
+        h = {'<cmd>Telescope help_tags<CR>', 'Vim help tags'},
+        m = {'<cmd>Telescope man_pages<CR>', 'Man pages'}
+    },
+    p = {
+        p = {'<cmd>Telescope projects<CR>', 'Switch to project'},
+        f = find_file_in_project
+    },
+    ["<space>"] = find_file_in_project,
+    ["."] = browse_files,
+    [","] = {"<cmd>Telescope buffers<CR>", "Switch buffer"},
+    ["/"] = {"<cmd>Telescope live_grep<CR>", "Live grep"}
+}, {
+    prefix = "<leader>"
+})
+
+return M

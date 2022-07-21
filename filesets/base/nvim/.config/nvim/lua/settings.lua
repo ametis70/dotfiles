@@ -19,14 +19,13 @@ utils.opt('o', 'shiftround', true)
 utils.opt('o', 'smartcase', true)
 utils.opt('o', 'splitbelow', true)
 utils.opt('o', 'splitright', true)
-utils.opt('o', 'wildmode', 'list:longest')
 utils.opt('w', 'number', true)
 utils.opt('w', 'relativenumber', true)
-utils.opt('w', 'foldlevel', 99)
 utils.opt('w', 'cursorline', true)
 utils.opt('o', 'clipboard', 'unnamed,unnamedplus')
 utils.opt('o', 'lazyredraw', true)
 utils.opt('b', 'undofile', true)
+utils.opt('o', 'mouse', 'a')
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'

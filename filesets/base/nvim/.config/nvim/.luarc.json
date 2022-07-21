@@ -1,0 +1,9 @@
+{
+    "Lua": {
+        "runtime.version": "LuaJIT",
+        "workspace.checkThirdParty": false
+    },
+    "Lua.diagnostics.globals": [
+        "require"
+    ]
+}

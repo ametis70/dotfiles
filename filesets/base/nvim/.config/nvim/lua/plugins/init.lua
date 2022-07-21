@@ -2,13 +2,23 @@
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
-    -- Fuzzy finder
+    use 'antoinemadec/FixCursorHold.nvim'
+
     use {
-        'ibhagwan/fzf-lua',
-        requires = {
-            'vijaymarupudi/nvim-fzf', 'kyazdani42/nvim-web-devicons' -- optional for icons
-        },
-        config = [[require('plugins.fzf-lua')]]
+        "ahmedkhalf/project.nvim",
+        config = [[require('plugins.project-nvim')]]
+    }
+
+    use {
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+        }, "nvim-telescope/telescope-file-browser.nvim",
+        "nvim-telescope/telescope-ui-select.nvim", {
+            'nvim-telescope/telescope.nvim',
+            requires = {{'nvim-lua/plenary.nvim'}},
+            config = [[require('plugins.telescope-nvim')]]
+        }
     }
 
     -- File explorer
@@ -22,66 +32,99 @@ return require('packer').startup(function()
         config = [[require('plugins.nvim-tree')]]
     }
 
-    -- LSP config
+    -- LSP
     use {
-        'neovim/nvim-lspconfig',
-        config = [[require('plugins.lsp')]]
+        'folke/lsp-colors.nvim', -- Color groups
+        'williamboman/nvim-lsp-installer', -- Installer
+        'folke/lua-dev.nvim', -- Lua
+        'jose-elias-alvarez/typescript.nvim', -- Typsecript
+        'jose-elias-alvarez/null-ls.nvim', -- Tooling
+        'stevearc/aerial.nvim', -- Outline
+        'b0o/schemastore.nvim', -- JSON schemas
+        {
+            -- Diagnostics
+            'folke/trouble.nvim',
+            config = [[require('plugins.trouble-nvim')]]
+        }, {
+            -- Lightbulb
+            'kosayoda/nvim-lightbulb',
+            config = function()
+                require('nvim-lightbulb').setup({
+                    autocmd = {
+                        enabled = true
+                    }
+                })
+            end
+        }, {
+            -- LSP Status indicator
+            'j-hui/fidget.nvim',
+            config = function() require"fidget".setup {} end
+        }, {
+            'neovim/nvim-lspconfig', -- Config
+            config = [[require('plugins.lsp')]]
+        }
     }
-    use {'williamboman/nvim-lsp-installer'}
 
-    -- Langugage specific LSP plugins
-    use {'tjdevries/nlua.nvim'}
-    use {'jose-elias-alvarez/nvim-lsp-ts-utils'}
+    -- Buffer line
+    -- use {
+    --     'akinsho/bufferline.nvim',
+    --     tag = "v2.*",
+    --     requires = 'kyazdani42/nvim-web-devicons',
+    --     config = function() require("bufferline").setup {} end
+    -- }
 
-    -- Additional LSP plugins
+    -- Completion
+
     use {
-        'tami5/lspsaga.nvim',
-        commit = '373bc031b39730cbfe492533c3acfac36007899a',
-        config = [[require('plugins.lspsaga-nvim')]]
+        'onsails/lspkind-nvim', -- Pretty icons
+        'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path',
+        'hrsh7th/cmp-cmdline', 'hrsh7th/cmp-omni',
+        'hrsh7th/cmp-nvim-lsp-signature-help', {
+            'hrsh7th/nvim-cmp',
+            config = [[require('plugins.nvim-cmp')]]
+        }
     }
 
-    use {'folke/lsp-colors.nvim'}
+    -- Snippets
+    use 'L3MON4D3/LuaSnip'
+    use 'saadparwaiz1/cmp_luasnip'
+    use 'rafamadriz/friendly-snippets'
 
-    -- Outline (LSP)
-    -- use { 'simrat39/symbols-outline.nvim' }
-    use {'stevearc/aerial.nvim'}
-
-    -- Diagnostics
+    -- Comments
     use {
-        'folke/trouble.nvim',
-        config = [[require('plugins.trouble-nvim')]]
+        'numToStr/Comment.nvim',
+        config = function() require('Comment').setup() end
+    }
+
+    -- autopairs
+    use {
+        'windwp/nvim-autopairs',
+        config = function() require('nvim-autopairs').setup() end
     }
 
     -- Tree-sitter
     use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = [[require('plugins.nvim-treesitter')]]
+        'JoosepAlviste/nvim-ts-context-commentstring', {
+            'nvim-treesitter/nvim-treesitter',
+            run = ':TSUpdate',
+            config = [[require('plugins.nvim-treesitter')]]
+        }
     }
 
     -- Formatting
-    use {
-        'mhartington/formatter.nvim',
-        config = [[require('plugins.formatter-nvim')]]
-    }
+    -- use {
+    --     'mhartington/formatter.nvim',
+    --     config = [[require('plugins.formatter-nvim')]]
+    -- }
+
     use {
         'davinche/whitespace-vim',
         config = [[require('plugins.whitespace-vim')]]
     }
 
-    -- Completion
-    use {
-        'hrsh7th/nvim-compe',
-        config = [[require('plugins.nvim-compe')]]
-    }
-
-    -- Snippets
-    use {'hrsh7th/vim-vsnip'}
-    use {'hrsh7th/vim-vsnip-integ'}
-
     -- Terminal
     use {
-        "akinsho/nvim-toggleterm.lua",
+        "akinsho/toggleterm.nvim",
         config = [[require('plugins.nvim-toggleterm')]]
     }
 
@@ -91,10 +134,21 @@ return require('packer').startup(function()
         requires = {'nvim-lua/plenary.nvim'},
         config = [[require('plugins.gitsigns-nvim')]]
     }
-    use {'tpope/vim-fugitive'}
     use {
-        'kdheepak/lazygit.nvim',
-        config = [[require('plugins.lazygit-nvim')]]
+        'tpope/vim-fugitive',
+        config = [[require('plugins.vim-fugitive')]]
+    }
+    use {
+        'TimUntersberger/neogit',
+        config = [[require('plugins.neogit')]]
+    }
+    use {
+        'f-person/git-blame.nvim',
+        config = [[require('plugins.git-blame-nvim')]]
+    }
+    use {
+        'sindrets/diffview.nvim',
+        requires = 'nvim-lua/plenary.nvim'
     }
 
     -- Indent lines
@@ -111,6 +165,27 @@ return require('packer').startup(function()
     use {'dhruvasagar/vim-table-mode'}
     use {'tpope/vim-eunuch'}
 
+    use {
+        "folke/which-key.nvim",
+        config = [[require('plugins.which-key')]]
+    }
+
+    use {
+        "folke/zen-mode.nvim",
+        config = [[require('plugins.zen-mode-nvim')]]
+    }
+
+    use {
+        "folke/twilight.nvim",
+        config = [[require('plugins.twilight-nvim')]]
+    }
+
+    use {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function() require("todo-comments").setup() end
+    }
+
     -- Statusline
     -- use {
     --     'ojroques/nvim-hardline',
@@ -126,11 +201,18 @@ return require('packer').startup(function()
         config = [[require('plugins.lualine')]]
     }
 
-    -- Syntax plugins
-    use {'euclidianAce/BetterLua.vim'}
+    -- Folding
+    use {
+        'kevinhwang91/nvim-ufo',
+        requires = 'kevinhwang91/promise-async',
+        config = [[require('plugins.nvim-ufo')]]
+    }
 
     -- Color highlighting
-    use {'norcalli/nvim-colorizer.lua'}
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function() require'colorizer'.setup() end
+    }
 
     -- Colorschemes
     use {
@@ -142,14 +224,13 @@ return require('packer').startup(function()
     use {'folke/tokyonight.nvim'}
     use {'marko-cerovac/material.nvim'}
 
-    -- Cursorline
-    -- use { 'xiyaowong/nvim-cursorword' }
-    -- use { 'yamatsum/nvim-cursorline' }
-
     use {
         'kyazdani42/nvim-web-devicons',
         config = [[require('plugins.nvim-web-devicons')]]
     }
+
+    -- package.json
+    use 'vuki656/package-info.nvim'
 
     -- Blade
     use {'Eduruiz/vim-blade'}
@@ -159,4 +240,10 @@ return require('packer').startup(function()
         'kristijanhusak/orgmode.nvim',
         config = [[require('plugins.orgmode-nvim')]]
     }
+
+    -- DAP
+    use 'mfussenegger/nvim-dap'
+    use 'Pocco81/dap-buddy.nvim'
+    use 'rcarriga/nvim-dap-ui'
+
 end)

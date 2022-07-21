@@ -1,44 +1,33 @@
-local utils = require('utils')
-utils.map('n', '<leader>op', '<cmd>NvimTreeToggle<CR>')
+local wk = require('which-key')
 
-vim.g.nvim_tree_special_files = {}
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_show_icons = {
-    git = 0,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1
-}
-
-vim.g.nvim_tree_icons = {
-    default = '',
-    git = {
-        unstaged = '',
-        staged = '',
-        unmerged = '',
-        renamed = '',
-        untracked = '',
-        deleted = '',
-        ignored = ""
+wk.register({
+    o = {
+        p = {"<cmd>NvimTreeToggle<CR>", "Open project sidebar"}
     }
-}
+}, {
+    prefix = "<leader>"
+})
 
 require'nvim-tree'.setup {
-    disable_netrw = true,
+    auto_reload_on_write = true,
+    create_in_closed_folder = false,
+    disable_netrw = false,
     hijack_netrw = true,
+    hijack_unnamed_buffer_when_opening = false,
+    ignore_buffer_on_setup = false,
     open_on_setup = false,
-    ignore_ft_on_setup = {},
-    update_to_buf_dir = {
-        enable = true,
-        auto_open = true
-    },
-    auto_close = false,
+    open_on_setup_file = false,
     open_on_tab = false,
+    sort_by = "name",
+    update_cwd = true,
+    reload_on_bufenter = false,
+    respect_buf_cwd = true,
+
+    ignore_ft_on_setup = {},
     hijack_cursor = false,
-    update_cwd = false,
     update_focused_file = {
-        enable = false,
-        update_cwd = false,
+        enable = true,
+        update_cwd = true,
         ignore_list = {}
     },
     system_open = {
@@ -49,11 +38,52 @@ require'nvim-tree'.setup {
         width = 30,
         height = 30,
         side = 'left',
-        auto_resize = false,
+        signcolumn = "no",
         mappings = {
             custom_only = false,
             list = {}
         }
+    },
+    renderer = {
+        special_files = {},
+        group_empty = false,
+        highlight_git = true,
+        icons = {
+            git_placement = "before",
+            show = {
+                file = true,
+                folder = true,
+                folder_arrow = true,
+                git = true
+            },
+            glyphs = {
+                default = '',
+                symlink = "",
+                git = {
+                    unstaged = '',
+                    staged = '',
+                    unmerged = '',
+                    renamed = '',
+                    untracked = '',
+                    deleted = '',
+                    ignored = ""
+                }
+            }
+        }
+    },
+    diagnostics = {
+        enable = false,
+        show_on_dirs = false,
+        icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = ""
+        }
+    },
+    trash = {
+        cmd = "trash",
+        require_confirm = true
     }
 }
 
