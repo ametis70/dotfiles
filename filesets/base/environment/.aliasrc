@@ -4,41 +4,22 @@
 command -v vim >/dev/null && alias vi="vi" vim="vim" vimdiff="vimdiff"
 command -v nvim >/dev/null && alias vi="nvim" vim="nvim" vimdiff="nvim -d"
 
-# neovim-remote
-nvr_command="nvr --remote-wait +'set bufhidden=wipe'"
-command -v nvr >/dev/null && alias vi="$nvr_command" vim="$nvr_command"
-
-if [ `uname -s` = 'Linux' ]; then
-  # Verbose
+if [ "$OS" = 'Linux' ]; then
   alias \
   	rm="rm -v" \
   	mkdir="mkdir -pv" \
   	dmesg="dmesg --ctime" \
-    sudo='sudo ' # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
-  
-  # Color
-  alias \
-  	grep="grep -i --color=auto" \
+   	grep="grep -i --color=auto" \
   	Grep="grep --color=auto" \
-  	diff="diff --color=auto"
-  
-  # Xorg
-  alias startx="startx ~/.xinitrc"
-  
-  # Improved coreutils
-  alias \
+  	diff="diff --color=auto" \
+    startx="startx ~/.xinitrc" \
     ls="ls -hN --group-directories-first --color=auto" \
-  	ll="ls -lahN --group-directories-first --color=auto" \
-    cat="bat" \
-    top="gotop"\
-    cp="advcp -pi" \
-    mv="advmv -gi"
-  
-  # ls="ls-icons -hN --group-directories-first --color=auto" \
-  # ll="ls-icons -lahN --group-directories-first --color=auto" \
-  
-  # Other software
-  alias \
-    nnn='n' \
-    N='sudo -E nnn -daH '
+  	ll="ls -lahN --group-directories-first --color=auto"
+
+  alias sudo='sudo ' # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
+
+  # alt software
+  command -v bat > /dev/null && alias cat="bat"
+  command -v gotop > /dev/null && alias top="gotop"
+  command -v advcp > /dev/null && alias cp="advcp -pi" mv="advmv -gi"
 fi
