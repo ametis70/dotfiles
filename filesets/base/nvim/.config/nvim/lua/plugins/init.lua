@@ -16,7 +16,7 @@ return require('packer').startup(function()
         }, "nvim-telescope/telescope-file-browser.nvim",
         "nvim-telescope/telescope-ui-select.nvim", {
             'nvim-telescope/telescope.nvim',
-            requires = {{'nvim-lua/plenary.nvim'}},
+            requires = {'nvim-lua/plenary.nvim'},
             config = [[require('plugins.telescope-nvim')]]
         }
     }
