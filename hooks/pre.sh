@@ -15,7 +15,6 @@ for dir in $(find . -type d); do
     c=$(echo "$_path" | wc -m)
     if [ $c -gt 1 ]; then
         abspath="$HOME/$_path"
-	echo "$abspath"
         [ ! -d "$abspath" ] && mkdir -p "$abspath"
     fi
 done
