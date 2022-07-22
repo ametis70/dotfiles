@@ -30,5 +30,14 @@ utils.opt('o', 'mouse', 'a')
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
+-- Terminal
+vim.api.nvim_create_augroup("Terminal", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {group = "Terminal", pattern="*", callback=function ()
+  vim.wo.number = false
+  vim.wo.relativenumber = false
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], { noremap = true })
+  vim.cmd('startinsert')
+end})
+
 require('keybindings')
 require('colorscheme')

@@ -19,7 +19,7 @@ wk.register({
     },
     b = {
         name = "Buffer",
-        k = {"<cmd>bdel<CR>", "Kill buffer"},
+        d = {"<cmd>bdel<CR>", "Delete buffer"},
         s = {"<cmd>write<CR>", "Save buffer"}
     },
     h = {
@@ -32,10 +32,25 @@ wk.register({
         name = "Note"
     },
     t = {
-        name = "Toggle"
+        name = "Toggle",
     },
     g = {
         name = "Git"
+    },
+    o = {
+      name = "Open",
+      t = { '<cmd>exe v:count1 . "ToggleTerm"<CR>', "Open terminal" },
+      T = { "<cmd>terminal<CR>", "Open terminal here" }
+    },
+    w = {
+      name = "Window",
+      d = { "<cmd>close<CR>", "Close window"},
+      v = { "<cmd>vsplit<CR>", "Vertical split"},
+      s = { "<cmd>split<CR>", "Horizontal split"},
+    },
+    q = {
+      name = "Quit",
+      q = { "<cmd>qa<CR>", "Quit nvim"}
     }
 }, {
     prefix = "<leader>"
