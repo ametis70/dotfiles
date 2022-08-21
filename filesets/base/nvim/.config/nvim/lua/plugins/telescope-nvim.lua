@@ -68,7 +68,7 @@ wk.register({
         b = browse_files
     },
     b = {
-        b = {"<cmd>Telescope buffers<CR>", "Switch buffer"}
+        b = {"<cmd>Telescope buffers<CR>", "Switch buffer"},
     },
     h = {
         h = {'<cmd>Telescope help_tags<CR>', 'Vim help tags'},

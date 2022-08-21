@@ -6,19 +6,6 @@ gui:
   expandFocusedSidePanel: false
   mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
   language: 'auto' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl'
-  theme:
-    lightTheme: false # For terminals with a light background
-    activeBorderColor:
-      - white
-      - bold
-    inactiveBorderColor:
-      - green
-    optionsTextColor:
-      - blue
-    selectedLineBgColor:
-      - default
-    selectedRangeBgColor:
-      - blue
   commitLength:
     show: true
   mouseEvents: true
@@ -29,6 +16,11 @@ gui:
   showRandomTip: true
   showCommandLog: true
   commandLogSize: 8
+  theme:
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - default
 git:
   paging:
     colorArg: always
@@ -49,7 +41,7 @@ git:
   parseEmoji: false
 os:
   editCommand: '$GIT_EDITOR' # see 'Configuring File Editing' section
-  editCommandTemplate: '{{editor}} {{filename}}'
+  editCommandTemplate: ' '
   openCommand: ''
 refresher:
   refreshInterval: 10 # file/submodule refresh interval in seconds
@@ -65,9 +57,10 @@ disableStartupPopups: false
 notARepository: 'prompt' # one of: 'prompt' | 'create' | 'skip'
 keybinding:
   universal:
-    quit: '<c-c>'
-    quit-alt1: 'Q'
-    return: 'q' # return to previous menu, will quit if there's nowhere to return
+    quit: '<c-q>'
+    quit-alt1: '<c-c>'
+    return: '<esc>' # return to previous menu, will quit if there's nowhere to return
+    quitWithoutChangingDirectory: '<c-Q>'
     togglePanel: '<tab>' # goto the next panel
     prevItem: '<up>' # go one line up
     nextItem: '<down>' # go one line down

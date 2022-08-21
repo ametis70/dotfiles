@@ -1,4 +1,6 @@
-require("nvim-lsp-installer").setup({
+local wk = require("which-key")
+
+require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
 
@@ -11,50 +13,92 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	border = "rounded",
 })
 
-local aerial = require("aerial")
+require("aerial").setup({})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- nvim-ufo
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
+-- capabilities.textDocument.foldingRange = {
+-- 	dynamicRegistration = false,
+-- 	lineFoldingOnly = true,
+-- }
+
+local lsp_rename_mapping = {
+	function()
+		vim.lsp.buf.rename()
+	end,
+	"Rename LSP symbol",
+}
+local lsp_references_mapping = {
+	"<cmd>TroubleToggle lsp_references<CR>",
+	"LSP references",
 }
 
 local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-	aerial.on_attach(client)
+	require("aerial").on_attach(client, bufnr)
 
-	local mappings = {
-		["gD"] = "<cmd>lua vim.lsp.buf.declaration()<CR>",
-		["gd"] = "<cmd>lua vim.lsp.buf.definition()<CR>",
-		["K"] = "<cmd>lua vim.lsp.buf.hover()<CR>",
-		["gi"] = "<cmd>lua vim.lsp.buf.implementation()<CR>",
-		["<C-k"] = "<cmd>lua vim.lsp.buf.signature_help()<CR>",
-		["<leader>wa"] = "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-		["<leader>wr"] = "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-		["<leader>wl"] = "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-		["<leader>ca"] = "<cmd>lua vim.lsp.buf.code_action()<CR>",
-		["gr"] = "<cmd>vim.lsp.buf.rename()<CR>",
-		["<leader>cD"] = "<cmd>lua vim.lsp.buf.type_definition()<CR>",
-		["<leader>cR"] = "<cmd>lua vim.lsp.buf.references()<CR>",
-		["<leader>cf"] = "<cmd>lua vim.lsp.buf.formatting()<CR>",
-		["<leader>co"] = "<cmd>AerialToggle!<CR>",
-		["[["] = "<cmd>AerialPrevUp<CR>",
-		["]]"] = "<cmd>AerialNext<CR>",
-	}
+	-- Normal mappings
+	wk.register({
+		c = {
+			a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action" },
+			r = lsp_rename_mapping,
+			f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format file" },
+			o = { "<cmd>AerialToggle!<CR>", "Toggle outline" },
+			x = { "<cmd>lua vim.diagnostic.open_float({source= true})<CR>", "Show line diagnostics" },
+			R = lsp_references_mapping,
+			t = {
+				name = "Trouble",
+				t = { "<cmd>TroubleToggle<CR>", "Trouble Toggle" },
+				r = lsp_references_mapping,
+				w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<CR>", "Workspace diagnostics" },
+				d = { "<cmd>TroubleToggle lsp_document_diagnostics<CR>", "Document diagnostics" },
+				q = { "<cmd>TroubleToggle quickfix<CR>", "Quickfix" },
+				l = { "<cmd>TroubleToggle loclist<CR>", "Location list" },
+			},
+			g = {
+				name = "Go to",
+				D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to declaration" },
+				d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
+				i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation" },
+				t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go to type definition" },
+			},
+		},
+	}, {
+		prefix = "<leader>",
+		buffer = bufnr,
+	})
 
-	for lhs, rhs in pairs(mappings) do
-		vim.api.nvim_buf_set_keymap(bufnr, "n", lhs, rhs, {
-			noremap = true,
-			silent = true,
-		})
+	-- Visual mappings
+	wk.register({
+		c = {
+			a = { "<cmd>lua vim.lsp.buf.range_code_action()<CR>", "Range code action" },
+		},
+	}, {
+		mode = "v",
+		prefix = "<leader>",
+		buffer = bufnr,
+	})
+
+	-- No leader mappings
+	wk.register({
+		gd = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
+		K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "LSP Hover" },
+		["<C-k"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "LSP Signature" },
+		["<f2>"] = lsp_rename_mapping,
+		["[["] = { "<cmd>AerialPrevUp<CR>", "Outline previous" },
+		["]]"] = { "<cmd>AerialNext<CR>", "Outline next" },
+	}, {
+		buffer = bufnr,
+	})
+
+	if client.name ~= "null-ls" then
+		client.resolved_capabilities.document_formatting = false
+		client.resolved_capabilities.document_range_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
 	end
-
-	-- Disable lsp formatting
-	client.resolved_capabilities.document_formatting = false
-	client.resolved_capabilities.document_range_formatting = false
 end
 
 local settings = {
@@ -205,3 +249,17 @@ require("null-ls").setup({
 --     end
 -- }
 --
+
+require("nvim-lightbulb").setup({
+	autocmd = {
+		enabled = true,
+	},
+	sign = {
+		enabled = false,
+	},
+	virtual_text = {
+		enabled = true,
+	},
+})
+
+require("fidget").setup({})
