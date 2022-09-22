@@ -175,6 +175,24 @@ return require("packer").startup(function()
 
 	-- Handy stuff
 	use({
+		"echasnovski/mini.nvim",
+		branch = "stable",
+		config = function()
+			require("mini.jump").setup({})
+			require("mini.bufremove").setup({})
+		end,
+	})
+	use({
+		"ggandor/leap.nvim",
+		requires = {
+			"tpope/vim-repeat",
+		},
+		config = function()
+			require("leap").set_default_keymaps()
+		end,
+	})
+
+	use({
 		"ygm2/rooter.nvim",
 		config = function()
 			vim.g.outermost_root = false
@@ -269,5 +287,18 @@ return require("packer").startup(function()
 	use("rcarriga/nvim-dap-ui")
 
 	-- Test runner
-	use("David-Kunz/jester")
+	use({
+		"haydenmeade/neotest-jest",
+		"nvim-neotest/neotest-go",
+		"nvim-neotest/neotest-python",
+		{
+			"nvim-neotest/neotest",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"nvim-treesitter/nvim-treesitter",
+				"antoinemadec/FixCursorHold.nvim",
+			},
+			config = [[require('plugins.testing')]],
+		},
+	})
 end)

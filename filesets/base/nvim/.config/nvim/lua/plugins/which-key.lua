@@ -47,6 +47,9 @@ wk.register({
 	g = {
 		name = "Git",
 	},
+	r = {
+		name = "Run",
+	},
 	o = {
 		name = "Open",
 		t = { '<cmd>exe v:count1 . "ToggleTerm"<CR>', "Open terminal" },

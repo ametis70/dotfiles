@@ -8,20 +8,12 @@ if not tsconf then
 	return
 end
 
-vim.o.foldenable = true
-vim.o.foldmethod = "expr"
 -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldcolumn = "1"
-vim.o.foldlevel = 99
-
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-
-require("ufo").setup({
-	provider_selector = function()
-		return { "treesitter", "indent" }
-	end,
-})
+-- vim.o.foldenable = true
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldcolumn = "1"
+-- vim.o.foldlevel = 99
+-- vim.o.foldlevelstart = 99
 
 tsconf.setup({
 	ensure_installed = "all",
