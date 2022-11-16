@@ -27,6 +27,9 @@ utils.opt("o", "lazyredraw", true)
 utils.opt("b", "undofile", true)
 utils.opt("o", "mouse", "a")
 utils.opt("o", "scrolloff", 10)
+utils.opt("o", "laststatus", 3)
+
+vim.g.maplocalleader = ","
 
 -- Highlight on yank
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}")

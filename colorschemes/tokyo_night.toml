@@ -42,3 +42,4 @@ color15 = "#c0caf5"
 
 [custom]
 vim_colorscheme = "vim.g.tokyonight_style = 'night'\nvim.cmd('colorscheme tokyonight')"
+vim_lualine_theme = "tokyonight"

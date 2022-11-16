@@ -1,6 +1,7 @@
 local utils = require("utils")
 local tsconf = require("nvim-treesitter.configs")
 
+require("orgmode").setup_ts_grammar()
 require("nvim-ts-autotag").setup()
 
 if not tsconf then
@@ -8,18 +9,12 @@ if not tsconf then
 	return
 end
 
--- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.o.foldenable = true
--- vim.o.foldmethod = "expr"
--- vim.o.foldcolumn = "1"
--- vim.o.foldlevel = 99
--- vim.o.foldlevelstart = 99
-
 tsconf.setup({
 	ensure_installed = "all",
 	ignore_install = { "phpdoc" },
 	highlight = {
 		enable = true,
+		additional_vim_regex_highlighting = { "org" },
 	},
 	indent = {
 		enable = true,

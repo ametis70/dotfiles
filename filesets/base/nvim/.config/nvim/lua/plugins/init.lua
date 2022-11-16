@@ -66,7 +66,7 @@ return require("packer").startup(function()
 			"williamboman/mason-lspconfig.nvim",
 			require = "williamboman/mason.nvim",
 		},
-		"folke/lua-dev.nvim", -- Lua
+		"folke/neodev.nvim", -- Lua
 		"jose-elias-alvarez/typescript.nvim", -- Typsecript
 		"jose-elias-alvarez/null-ls.nvim", -- Tooling
 		"stevearc/aerial.nvim", -- Outline
@@ -134,6 +134,19 @@ return require("packer").startup(function()
 			run = ":TSUpdate",
 			config = [[require('plugins.nvim-treesitter')]],
 		},
+		{
+			"nvim-orgmode/orgmode",
+			config = [[require('plugins.orgmode-nvim')]],
+		},
+	})
+
+	-- Note taking
+	use({
+    'jakewvincent/mkdnflow.nvim',
+    {
+		"mickael-menu/zk-nvim",
+		config = [[require('plugins.notes')]],
+    }
 	})
 
 	-- Terminal
@@ -231,20 +244,23 @@ return require("packer").startup(function()
 	-- }
 
 	use({
-		"hoob3rt/lualine.nvim",
-		requires = {
-			"kyazdani42/nvim-web-devicons",
-			opt = true,
+		"b0o/incline.nvim",
+		{
+			"hoob3rt/lualine.nvim",
+			requires = {
+				"kyazdani42/nvim-web-devicons",
+				opt = true,
+			},
+			config = [[require('plugins.lualine')]],
 		},
-		config = [[require('plugins.lualine')]],
 	})
 
 	-- Folding
-	use({
-		"kevinhwang91/nvim-ufo",
-		requires = "kevinhwang91/promise-async",
-		config = [[require('plugins.nvim-ufo')]],
-	})
+	--	use({
+	--		"kevinhwang91/nvim-ufo",
+	--		requires = "kevinhwang91/promise-async",
+	--		config = [[require('plugins.nvim-ufo')]],
+	--	})
 
 	-- Color highlighting
 	use({
@@ -274,12 +290,6 @@ return require("packer").startup(function()
 
 	-- Blade
 	use({ "Eduruiz/vim-blade" })
-
-	-- org-mode
-	use({
-		"kristijanhusak/orgmode.nvim",
-		config = [[require('plugins.orgmode-nvim')]],
-	})
 
 	-- DAP
 	use("mfussenegger/nvim-dap")

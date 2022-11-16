@@ -43,4 +43,5 @@ base0F = "#be5046"
 [custom]
 # vim_colorscheme = "vim.cmd('colorscheme base16-onedark')"
 vim_colorscheme = "require('colorbuddy').colorscheme('onebuddy')"
+vim_lualine_theme = "onedark"
 emacs_colorscheme = "doom-one"
