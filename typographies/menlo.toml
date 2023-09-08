@@ -1,0 +1,11 @@
+name = "Base"
+
+[custom]
+
+[custom.mono]
+font = "Menlo"
+weight = "Regular"
+bold = "Bold"
+italic = "Italic"
+bold_italic = "Bold Italic"
+size = 14
